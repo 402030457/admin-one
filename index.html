@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<script src="js/rem.js"></script>
+	<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="one" id="">
+				<img id="back" src="./img/logo.png" >
+			</div>
+			<h1 class="mui-title">kill</h1>
+			<div class="two" id="">
+				<input id="play" type="button" onclick="autoPlay()" value="播放" />
+				<input id="pause" type="button" onclick="closePlay()" value="关闭" />
+				<img id="photo" src="img/open.jpg" >
+				<audio id="myaudio" src="高田雅史%20-%20ゼツボウシンドローム%20The%20Animation.mp3" hidden="flase" autoplay="true" loop="true">
+				</audio>
+			</div>
+		</header>
+		
+		<div class="lbt">
+			<img src="./img/1.jpg" >
+		</div>
+		
+		
+		
+		<section>
+			<div id="name">
+				<h1><span id="">用户名</span></h1>
+				<input type="" name="" id="" value="" />
+			</div>
+			<div id="pass">
+				<h1><span id="">密码</span></h1>
+				<input type="" name="" id="" value="" />
+			</div>
+		</section>
+		
+		
+		
+		<footer>
+			<p>
+				<a href="number.html">登陆</a>
+			</p>
+			<p>
+				<a href="land.html">注册</a>
+			</p>
+			<p>
+				<a>忘记密码</a>
+			</p>
+		</footer>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<script>
+			$("#music").click(function (){
+					$(this).attr("src","./img/stop.jpg")
+			})
+			var lbt = document.getElementsByTagName('img');
+			var now=1;
+			function show(){
+				for(var i=0;i<lbt.length;i++){
+					$(lbt[2]).attr("src","./img/"+now+".jpg")
+				}
+			}
+			console.log(lbt.length)
+			setInterval(function(){
+				now++
+				if(now == lbt.length+1){
+					now = 1
+				}
+				show()
+			},3000)
+		</script>
+		<script src="js/reset.js"></script>
+	</body>
+</html>

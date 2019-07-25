@@ -1,0 +1,60 @@
+.lbt{
+	background-color: darkred;
+}
+.lbt > h1{
+	font-size: .35rem;
+	height: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+
+section{
+	margin-top: 0;
+	display: flex;
+	flex-direction: column;
+}
+.top{
+	font-size: .45rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.top > div{
+	padding: .5rem 0;
+	justify-content: space-around;
+}
+.top > div > span{
+	width: 2rem;
+	display: flex;
+	justify-content: center;
+	background-color: red;
+	border-radius: .1rem;
+}
+section ul{
+	width: 100%;
+	font-size: .45rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+section li{
+	width: 100%;
+	padding: .3rem 0;
+	display: flex;
+	justify-content: center;
+}
+section p{
+	width: 40%;
+	display: flex;
+	justify-content: center;
+}
+
+
+
+
+
+
+
+
