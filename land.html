@@ -4,9 +4,20 @@
 		<meta charset="utf-8">
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-		<link rel="stylesheet" type="text/css" href="css/land.css"/>
 		<script src="js/rem.js"></script>
 		<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			section > div{
+				display: flex;
+				align-items: center;
+			}
+			section > div >img{
+				margin-left: 5%;
+				width: .5rem;
+				height: .5rem;
+				border-radius: 50%;
+			}
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -18,8 +29,7 @@
 				<input id="play" type="button" onclick="autoPlay()" value="播放" />
 				<input id="pause" type="button" onclick="closePlay()" value="关闭" />
 				<img id="photo" src="img/open.jpg" >
-				<audio id="myaudio" src="高田雅史%20-%20ゼツボウシンドローム%20The%20Animation.mp3" hidden="flase" autoplay="true" loop="true">
-				</audio>
+				<audio id="myaudio" src="back.mp3" hidden="flase" autoplay="true" loop="true"></audio>
 			</div>
 		</header>
 		
@@ -28,25 +38,30 @@
 		
 		
 		<section>
-			<div id="name">
+			<div id="hu">
 				<h1><span id="">用户名</span></h1>
-				<input type="" name="" id="" value="" />
+				<input type="" name="" id="zhuhu" value="" />
+				<img src="img/red.jpg">
 			</div>
 			<div id="pass">
 				<h1><span id="">密码</span></h1>
-				<input type="" name="" id="" value="" />
+				<input type="password" name="" id="passone" disabled="disabled" value="" />
+				<img src="img/red.jpg">
 			</div>
-			<div id="pass">
+			<div id="twopass">
 				<h1><span id="">确认密码</span></h1>
-				<input type="" name="" id="" value="" />
+				<input type="password" name="" id="passtwo" disabled="disabled" value="" />
+				<img src="img/red.jpg">
 			</div>
-			<div id="pass">
+			<div id="you">
 				<h1><span id="">邮箱</span></h1>
-				<input type="" name="" id="" value="" />
+				<input type="" name="" id="zhuyou" disabled="disabled" value="" />
+				<img src="img/red.jpg">
 			</div>
-			<div id="pass">
+			<div id="shouji">
 				<h1><span id="">手机</span></h1>
-				<input type="" name="" id="" value="" />
+				<input type="" name="" id="haoma" disabled="disabled" value="" />
+				<img src="img/red.jpg">
 			</div>
 		</section>
 		
@@ -54,14 +69,135 @@
 		
 		<footer>
 			<p>
-				<a>提交</a>
+				<a name='0' id="ti">提交</a>
 			</p>
 			<p>
-				<a>重置</a>
+				<a id="" href="land.html">重置</a>
 			</p>
 		</footer>
 		
+		<script type="text/javascript">
+			
+			
+			$('#zhuhu').blur(function(){
+				let val = $('#zhuhu').val()
+				let zeo = /^[\u4e00-\u9fa5]+$/;
+				let zet = /^[a-zA-Z]{1,}[0-9A-Za-z]{7,}$/;
+				if(val == ''){
+					alert('请输入用户名')
+				}else{
+					if (!zeo.test(val)) {
+						if(zet.test(val)){
+							if(localStorage.getItem(val) == null){
+								$('#hu > img').attr('src','img/lv.jpg')
+								$(this).attr('disabled','disabled')
+								$('#passone').removeAttr('disabled')
+							}else{
+								$('#hu > img').attr('src','img/red.jpg')
+								alert('该账号已存在，请重新输入！')
+							}
+						}else{
+							$('#hu > img').attr('src','img/red.jpg')
+							alert('请输入首字为字母，至少8位字母加数字')
+						}
+					}else{
+						$('#hu > img').attr('src','img/red.jpg')
+						alert('不能包含汉字！')
+					}
+				}
+				
+			})
+			$('#passone').blur(function(){
+				let val = $('#passone').val()
+				let zeo = /^[\u4e00-\u9fa5]+$/;
+				let zet = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/;
+				if(val == ''){
+					alert('请输入密码')
+				}else{
+					if (!zeo.test(val)) {
+						if(zet.test(val)){
+							$('#pass > img').attr('src','img/lv.jpg')
+							$(this).attr('disabled','disabled')
+							$('#passtwo').removeAttr('disabled')
+							// localStorage.setItem(val,'')
+						}else{
+							$('#pass > img').attr('src','img/red.jpg')
+							alert('请输入至少8位字母加数字')
+						}
+					}else{
+						$('#pass > img').attr('src','img/red.jpg')
+						alert('不能包含汉字！')
+					}
+				}
+			})
+			$('#passtwo').blur(function(){
+				let val = $('#passtwo').val()
+				if (val == $('#passone').val()) {
+					$('#twopass > img').attr('src','img/lv.jpg')
+					$(this).attr('disabled','disabled')
+					$('#zhuyou').removeAttr('disabled')
+				}else{
+					$('#twopass > img').attr('src','img/red.jpg')
+					alert('两次密码不一致')
+				}
+			})
+			$('#zhuyou').blur(function(){
+				let val = $('#zhuyou').val()
+				let zeo = /^[\u4e00-\u9fa5]+$/;
+				let zet = /^\w{5,20}@(163|qq|sina).com$/;
+				if(val == ''){
+					alert('请输入邮箱')
+				}else{
+					if (!zeo.test(val)) {
+						if(zet.test(val)){
+							$('#you > img').attr('src','img/lv.jpg')
+							$(this).attr('disabled','disabled')
+							$('#haoma').removeAttr('disabled')
+							// localStorage.setItem(val,'')
+						}else{
+							$('#you > img').attr('src','img/red.jpg')
+							alert('邮箱格式错误！')
+						}
+					}else{
+						$('#you > img').attr('src','img/red.jpg')
+						alert('不能包含汉字！')
+					}
+				}
+			})
+			$('#haoma').blur(function(){
+				let val = $('#haoma').val()
+				let zeo = /^[\u4e00-\u9fa5]+$/;
+				let zet = /^[1][3,4,5,7,8][0-9]{9}$/;
+				if(val == ''){
+					alert('请输入手机')
+				}else{
+					if (!zeo.test(val)) {
+						if(zet.test(val)){
+							$('#shouji > img').attr('src','img/lv.jpg')
+							$(this).attr('disabled','disabled')
+							// localStorage.setItem(val,'')
+							$('#ti').attr('href','index.html')
+							$('#ti').click(function(){
+								localStorage.setItem($('#zhuhu').val(),$('#passone').val())
+							})
+						}else{
+							$('#shouji > img').attr('src','img/red.jpg')
+							alert('手机格式错误！')
+						}
+					}else{
+						$('#shouji > img').attr('src','img/red.jpg')
+						alert('不能包含汉字！')
+					}
+				}
+			})
+			
+			
 		
+			
+			
+			
+			
+		</script>
 		
 		
 		<script src="js/reset.js"></script>

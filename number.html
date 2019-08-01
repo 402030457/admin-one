@@ -18,8 +18,7 @@
 				<input id="play" type="button" onclick="autoPlay()" value="播放" />
 				<input id="pause" type="button" onclick="closePlay()" value="关闭" />
 				<img id="photo" src="img/open.jpg" >
-				<audio id="myaudio" src="高田雅史%20-%20ゼツボウシンドローム%20The%20Animation.mp3" hidden="flase" autoplay="true" loop="true">
-				</audio>
+				<audio id="myaudio" src="back.mp3" hidden="flase" autoplay="true" loop="true"></audio>
 			</div>
 		</header>
 		
@@ -32,18 +31,16 @@
 		<section>
 			<div class="top" id="">
 				<div class="left" id="">
-					<span id="">
+					<span id="left-one">
 						9
 					</span>
-					<span id="">
+					<span id="left-two">
 						10
 					</span>
-				</div>
-				<div class="right" id="">
-					<span id="">
+					<span id="right-one">
 						11
 					</span>
-					<span id="">
+					<span id="right-two">
 						12
 					</span>
 				</div>
@@ -52,11 +49,11 @@
 				<ul>
 					<li>
 						<h1><span id="">村民:</span></h1>
-						<p>4人</p>
+						<p><span id="cun">3</span>人</p>
 					</li>
 					<li>
 						<h1><span id="">狼人:</span></h1>
-						<p>3人</p>
+						<p><span id="lang">3</span>人</p>
 					</li>
 					<li>
 						<h1><span id="">预言家:</span></h1>
@@ -67,7 +64,7 @@
 						<p>1人</p>
 					</li>
 					<li>
-						<h1><span id="">猎人:</span></h1>
+						<h1><span id="">守卫:</span></h1>
 						<p>1人</p>
 					</li>
 				</ul>
@@ -78,10 +75,66 @@
 		
 		<footer>
 			<p>
-				<a>next</a>
+				<a id="not" href="fapai.html">next</a>
 			</p>
 		</footer>
 		
+		
+		<script type="text/javascript">
+			
+			if(localStorage.getItem("lastname") == 9){
+				$('#left-one').css('background','green')
+			}
+			if(localStorage.getItem("lastname") == 10){
+				$('#left-two').css('background','green')
+			}
+			if(localStorage.getItem("lastname") == 11){
+				$('#right-one').css('background','green')
+			}
+			if(localStorage.getItem("lastname") == 12){
+				$('#right-two').css('background','green')
+			}
+			
+			$('.top').find('span').click(function(){
+				localStorage.setItem("lastname",$(this).html());
+				$(this).siblings('span').css('background','red')
+				$(this).css('background','green')
+			})
+			$('#left-one').click(function(){
+				$('#cun').html('3')
+				$('#lang').html('3')
+			})
+			$('#left-two').click(function(){
+				$('#cun').html('4')
+				$('#lang').html('3')
+			})
+			$('#right-one').click(function(){
+				$('#cun').html('4')
+				$('#lang').html('4')
+			})
+			$('#right-two').click(function(){
+				$('#cun').html('5')
+				$('#lang').html('4')
+			})
+			
+			
+			
+			$('#not').click(function(){
+				localStorage.setItem("loti",'')
+				localStorage.setItem("die",'')
+				localStorage.setItem('jiey','')
+				localStorage.setItem('xian','')
+				localStorage.setItem('duy','')
+				localStorage.setItem('sha','')
+				localStorage.setItem("nub",'0')
+				localStorage.setItem("numb",'')
+				localStorage.setItem("wufa",'0')
+				localStorage.setItem("jieguo",' ')
+			})
+			
+// 检索
+// document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+		</script>
 		
 		<script src="js/reset.js"></script>
 	</body>

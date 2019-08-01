@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<script src="js/rem.js"></script>
+		<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#yh{
+				width: 60%;
+				font-size: .5rem;
+			}
+			section > div{
+				margin-top: 5%;
+				display: flex;
+				align-items: center;
+			}
+			section > div >img{
+				margin-left: 5%;
+				width: .5rem;
+				height: .5rem;
+				border-radius: 50%;
+			}
+			section > div > input{
+				margin-top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="one" id="">
+				<a><img id="back" src="./img/logo.png" ></a>
+			</div>
+			<h1 class="mui-title">修改密码</h1>
+			<div class="two" id="">
+				<input id="play" type="button" onclick="autoPlay()" value="播放" />
+				<input id="pause" type="button" onclick="closePlay()" value="关闭" />
+				<img id="photo" src="img/open.jpg" >
+				<audio id="myaudio" src="back.mp3" hidden="flase" autoplay="true" loop="true"></audio>
+			</div>
+		</header>
+		
+		
+		<section>
+			<div id="hu">
+				<h1><span id="">用户名:</span></h1>
+				<p id="yh"></p>
+			</div>
+			<div id="pass">
+				<h1><span id="">密码</span></h1>
+				<input type="password" name="" id="passone" value="" />
+				<img src="img/red.jpg">
+			</div>
+			<div id="twopass">
+				<h1><span id="">确认密码</span></h1>
+				<input type="password" name="" id="passtwo" disabled="disabled" value="" />
+				<img src="img/red.jpg">
+			</div>
+		</section>
+		
+		<footer>
+			<p>
+				<a name='0' id="ti">提交</a>
+			</p>
+			<p>
+				<a id="wuu" href="change2.html">重置</a>
+			</p>
+		</footer>
+		
+		
+		
+		
+		
+		<script type="text/javascript">
+			var xiu = localStorage.getItem('xiu')
+			$('#yh').text(xiu)
+			
+			
+			$('#passone').blur(function(){
+				let val = $('#passone').val()
+				let zeo = /^[\u4e00-\u9fa5]+$/;
+				let zet = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/;
+				if(val == ''){
+					alert('请输入密码')
+				}else{
+					if (!zeo.test(val)) {
+						if(zet.test(val)){
+							$('#pass > img').attr('src','img/lv.jpg')
+							$(this).attr('disabled','disabled')
+							$('#passtwo').removeAttr('disabled')
+							// localStorage.setItem(val,'')
+						}else{
+							$('#pass > img').attr('src','img/red.jpg')
+							alert('请输入至少8位字母加数字')
+						}
+					}else{
+						$('#pass > img').attr('src','img/red.jpg')
+						alert('不能包含汉字！')
+					}
+				}
+			})
+			$('#passtwo').blur(function(){
+				let val = $('#passtwo').val()
+				if (val == $('#passone').val()) {
+					$('#twopass > img').attr('src','img/lv.jpg')
+					$(this).attr('disabled','disabled')
+					$('#ti').click(function(){
+						localStorage.setItem(xiu,$('#passone').val())
+						alert('修改成功')
+						$('#ti').attr('href','index.html')
+						localStorage.setItem('xiu','')
+					})
+				}else{
+					$('#twopass > img').attr('src','img/red.jpg')
+					alert('两次密码不一致')
+				}
+			})
+			
+			
+		</script>
+		
+		<script src="js/reset.js"></script>
+	</body>
+</html>

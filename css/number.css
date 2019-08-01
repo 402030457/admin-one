@@ -1,5 +1,6 @@
 .lbt{
 	background-color: darkred;
+	padding: .5rem 0;
 }
 .lbt > h1{
 	font-size: .35rem;

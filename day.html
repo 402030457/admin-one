@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<script src="js/rem.js"></script>
+		<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#box{
+				padding-top: 1rem;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+			}
+			#wowin{
+				width: 80%;
+				background: #fff;
+				height: 3rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+			#wowin > p{
+				color: #8B0000;
+				font-size: .4rem;
+			}
+			#jieguo{
+				width: 100%;
+				overflow-y: auto;
+				border: .02rem solid white;
+				box-sizing: border-box;
+			}
+			#jie{
+				width: 100%;
+				height: 7rem;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+			}
+			#jie > h3{
+				font-size: .5rem;
+				color: #fff;
+			}
+			#jie > p{
+				font-size: .4rem;
+				color: yellow;
+			}
+			#winner{
+				font-size: 1rem;
+			}
+			footer{
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="one" id="">
+				<img id="back" src="./img/logo.png" >
+			</div>
+			<h1 class="mui-title">结果</h1>
+			<div class="two" id="">
+				<input id="play" type="button" onclick="autoPlay()" value="播放" />
+				<input id="pause" type="button" onclick="closePlay()" value="关闭" />
+				<img id="photo" src="img/open.jpg" >
+				<audio id="myaudio" src="back.mp3" hidden="flase" autoplay="true" loop="true"></audio>
+			</div>
+		</header>
+		
+		<div id="box">
+			<div id="wowin">
+				<h1 id="winner"></h1>
+				<p id="wo"></p>
+			</div>
+			<div id="jieguo">
+				<div id="jie">
+					
+				</div>
+			</div>
+		<footer>
+			<p>
+				<a href="number.html">再来一局</a>
+			</p>
+			<p>
+				<a href="index.html">退出登录</a>
+			</p>
+		</footer>
+		</div>
+		
+		
+		
+		<script type="text/javascript">
+			var winner = localStorage.getItem("win")
+			var man = localStorage.getItem("man")
+			$('#wo').text(man)
+			if(winner == 'true'){
+				$('#winner').text('村民胜利')
+			}else{
+				$('#winner').text('狼人胜利')
+			}
+			
+			var jieguo = localStorage.getItem("jieguo");
+			$('#jie').append(''+jieguo+'')
+							
+			
+		</script>
+		
+	</body>
+</html>

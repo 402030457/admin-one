@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<script src="js/rem.js"></script>
+		<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#liuc{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: .4rem;
+				padding-top: .3rem;
+			}
+			.res{
+				line-height: 1rem;
+				background: white;
+				padding: .1rem .3rem;
+				margin: .1rem 0;
+				border-radius: .05rem;
+			}
+			#liuc h1{
+				font-size: .6rem;
+				width: 50%;
+				text-align: center;
+			}
+			#liuc dl{
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				margin: .2rem;
+			} 
+			#liuc dt{
+				width: 40%;
+			} 
+			#liuc dd{
+				width: 25%;
+				margin: 0;
+				background: white;
+				padding: .1rem;
+				margin: .2rem 0;
+				border-radius: .05rem;
+				
+			} 
+			#faguan{
+				display: flex;
+				flex-direction: row-reverse;
+				font-size: .4rem;
+			}
+			#faguan a{
+				color: black;
+				padding: 0 .2rem;
+				border-radius: .05rem;
+				margin-right: .5rem;
+				background: white;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<header class="mui-bar mui-bar-nav">
+			<div class="one" id="">
+				<a href="number.html"><img id="back" src="./img/back.jpg" ></a>
+			</div>
+			<h1 class="mui-title">进行页</h1>
+			<div class="two" id="">
+				<input id="play" type="button" onclick="autoPlay()" value="播放" />
+				<input id="pause" type="button" onclick="closePlay()" value="关闭" />
+				<img id="photo" src="img/open.jpg" >
+				<audio id="myaudio" src="back.mp3" hidden="flase" autoplay="true" loop="true"></audio>
+			</div>
+		</header>
+		
+		
+		<div id="liuc">
+			<h1 class="res" id="">第<span id="day">一</span>天</h1>
+			<dl>
+				<dt class="res">晚上</dt>
+				<dd><a title='' name="lang">狼人杀人</a></dd>
+				<dd><a name="yu">预言家查看</a></dd>
+				<dd><a id="wu" name="wu">女巫选择</a></dd>
+				<dd><a name="shou" id="sishou">守卫选择</a></dd>
+			</dl>
+			<dl>
+				<dt class="res">白天</dt>
+				<dd><a id="fayan">竞选警长</a></dd>
+				<dd><a id="fajin" name="huiz">警徽选择</a></dd>
+				<dd><a id="jinyan">警长发言</a></dd>
+				<dd><a id="all">所有人发言</a></dd>
+				<dd><a id="toupiao" name="fangzhu">投票</a></dd>
+			</dl>
+		</div>
+		<div id="faguan">
+			<a id="none" name="boss" href="kill.html">法官查看</a>
+		</div>
+		 
+		<script type="text/javascript">
+			let sha = localStorage.getItem("sha")
+			let die = localStorage.getItem("die")
+			
+			var nub = parseInt(localStorage.getItem("nub"));
+			switch(nub){
+				case 1:
+					days()
+					$('#day').text('二')
+					break;
+				case 2:
+					days()
+					$('#day').text('三')
+					break;
+				case 3:
+					days()
+					$('#day').text('四')
+					break;
+				case 4:
+					days()
+					$('#day').text('五')
+					break;
+				case 5:
+					days()
+					$('#day').text('六')
+					break;
+				case 6:
+					days()
+					$('#day').text('七')
+					break;
+				case 7:
+					days()
+					$('#day').text('八')
+					break;
+				case 8:
+					days()
+					$('#day').text('九')
+					break;
+				case 9:
+					days()
+					$('#day').text('十')
+					break;	
+			}
+			localStorage.setItem("sishou", $('#day').text())
+			function days(){
+				$('#fayan').parent('dd').remove()
+				$('#fajin').parent('dd').remove()
+			}
+				
+			
+			$('a').click(function(){
+				localStorage.setItem("wo", $(this).attr('name'))
+			})
+			$('dd').click(function(){
+				var wufa = localStorage.getItem('wufa')
+				$('dl dd').removeAttr('title')
+				$('dl dd').eq(wufa).attr('title','1')
+				if($(this).attr('title') == 1){
+					if($(this).find('a').attr('name')){
+						$(this).find('a').attr('href','kill.html')
+					}else{
+						if($(this).find('a').attr('id') == 'fayan'){
+							alert('按逆时针发言')
+						}
+						
+						if($(this).find('a').attr('id') == 'jinyan'){
+							alert('请警长发言')
+						}
+						
+						if($(this).find('a').attr('id') == 'all'){
+							alert('按顺时针发言')
+						}
+					}
+					localStorage.setItem('wufa',parseInt(wufa)+1)
+				}else{
+					alert('请按顺序点击')
+				}
+				// if(wufa == $('dl dd').length){
+				// 	localStorage.setItem("wufa", '0')
+				// }
+			})
+			
+			$('#wu').click(function(){
+				localStorage.setItem("dusha",'')
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

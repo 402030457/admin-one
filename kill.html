@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<script src="js/rem.js"></script>
+		<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			section{
+				margin: 0;
+			}
+			ul{
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				padding-top: .3rem;
+			}
+			li{
+				width: 33.333%;
+			}
+			li i{
+				width: 70%;
+				/* height: 3rem; */
+				margin: 5% 0;
+				position: relative;
+			}
+			li img{
+				height: 100%;
+				width: 100%;
+			}
+			.background-photo{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#hui{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			footer{
+				margin-top: .2rem;
+			}
+			footer span{
+				background-color: white;
+				padding: .1rem .2rem;
+				border-radius: .05rem;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="long">
+		</ul>
+		
+		<div id="foot">
+		</div>
+			<footer>
+				<p>
+					<a id="yes">确定</a>
+				</p>
+				<p>
+					<a id="from">返回</a>
+				</p>
+			</footer>
+		
+		
+		<script type="text/javascript">
+			
+			
+			var numm = localStorage.getItem("lastname")
+			var man = localStorage.getItem("man")
+			var wo = localStorage.getItem("wo")
+			var jiey=localStorage.getItem('jiey')
+			var xian=localStorage.getItem('xian')
+			var sha=localStorage.getItem('sha')
+			var die = localStorage.getItem("die")
+			var duy = localStorage.getItem('duy')
+			var sishou = localStorage.getItem("sishou")
+			
+			var s = man;
+			art = s.split(",")
+			console.log(art)
+			var c = numm;
+			var nu = [];
+			for(var i=0;i<c;i++){
+				var a = art[i];
+				if(a == wo){
+					$(".long").append(" <li><section><div class='top'><i><img src='img/"+a+".jpg' ><img text='"+a+"' time='"+i+"' class='background-photo' title=''></i></div></section></li>");
+				}else{
+					$(".long").append(" <li><section><div class='top'><i><img src='img/"+a+".jpg' ><img text='"+a+"' time='"+i+"' class='background-photo' src='img/jin.jpg'></i></div></section></li>");
+				}
+			}
+			
+			
+			
+			if(xian ==''){
+				xian=''
+			}else{
+				$('.background-photo[time='+xian+']').parent('i').append("<img id='hui' src='img/hui.png'>")
+			}
+			
+			
+			var diee=die.split(',')
+			for(var dii=0;dii<diee.length-1;dii++){
+					if($('.background-photo[time='+diee[dii]+']').attr('text')== wo){
+						$('.background-photo[time='+diee[dii]+']').attr('src','img/logo.png').css('opacity','1')
+						$('#du').unbind()
+						$('#jie').unbind()
+					}else{
+						$('.background-photo[time='+diee[dii]+']').attr('src','img/sha.jpg').css('opacity','1')
+					}
+					$('.background-photo[time='+diee[dii]+']').attr('title','1')
+					// if(diee[dii]==xian){
+					// 	xian=666
+					// }
+			}
+			
+			
+			
+			
+			function form(){
+				var kill=[];
+				for(var ki=0; ki<c;ki++){
+					if($('.background-photo[time='+ki+']').attr('text') == 'lang'){
+						kill.push(ki)
+					}
+				}
+				
+				var cunn=[];
+				for(var cu=0; cu<c;cu++){
+					if(art[cu]=='pin'){
+						cunn.push(cu)
+					}
+				}
+					var sil=[]
+					for(var kii=0; kii<c;kii++){
+						if($('.background-photo[time='+kii+']').attr('title') == "1" && $('.background-photo[time='+kii+']').attr('text') == "lang"){
+							// kill.length
+							sil.push(kii)
+						}
+					}
+					var sip=[]
+					for(var cuu=0; cuu<c;cuu++){
+						if($('.background-photo[time='+cuu+']').attr('title') == "1" && $('.background-photo[time='+cuu+']').attr('text') == "pin"){
+							// kill.length
+							sip.push(cuu)
+						}
+					}
+					var kil = kill.join('')
+					var sill = sil.join('')
+					var cun = cunn.join('')
+					var sipp = sip.join('')
+					if(sill == kil){
+						alert('村民胜利')
+						$('#from').attr('href','day.html')
+						localStorage.setItem("win",'true')
+					}
+					if(sipp == cun){
+						alert('狼人胜利')
+						$('#from').attr('href','day.html')
+						localStorage.setItem("win",'flase')
+					}
+			}
+			
+			
+			
+			
+			$('li').click(function(){
+				$(this).siblings('li').find('.background-photo').removeAttr('name')
+				$(this).find('.background-photo').attr('name',1)
+				// $(this).siblings('li').find('.background-photo').removeAttr('data-name')
+			})
+			
+			//狼人
+			if(wo == 'lang'){
+				// shi()
+				form()
+				$('li').click(function(){
+					$(this).find('i').css('box-shadow','0 0 .5rem red')
+					$(this).siblings('li').find('i').removeAttr('style')
+				})
+				
+				$('#yes').click(function(){
+					if($('.background-photo[name=1]').attr('title') == ''){
+						alert('目标错误')
+					}else if($('.background-photo[name=1]').attr('title') == '1'){
+						alert('目标死亡')
+					}else{
+						if($('.background-photo[name=1]').attr('time')==undefined){
+							alert('请选择目标')
+						}else{
+							$(this).unbind();
+							$('#from').attr('href','play.html')
+							localStorage.setItem("sha",$('.background-photo[name=1]').attr('time')+',')
+						}
+						
+					}
+				})
+			}
+			
+			
+			
+			function shi(){
+				var tex = $('.background-photo[text='+wo+']').attr('time')
+				for(var dii=0;dii<diee.length-1;dii++){
+					if(diee[dii] == tex){
+						$('#yes').attr('id','');
+					}
+				}
+			}
+			
+			
+			// 预言家
+			if(wo == 'yu'){
+				
+				form()
+				shi()
+				if($('.background-photo[text="yu"]').attr('title') == '1'){
+					$('#from').attr('href','play.html')
+				}
+				
+				$('li').click(function(){
+					$(this).find('i').css('box-shadow','0 0 .5rem skyblue')
+					$(this).siblings('li').find('i').removeAttr('style')
+				})
+				let loti = localStorage.getItem("loti")
+				var lott=loti.split(',')
+				for(var ltt=0;ltt<lott.length-1;ltt++){
+					$('.background-photo[time='+lott[ltt]+']').css('opacity','0')
+				}
+				$('#yes').click(function(){
+					
+					
+					
+					if($('.background-photo[name=1]').attr('title') == ''){
+						alert('目标错误')
+					}else if($('.background-photo[name=1]').attr('title') == '1'){
+						alert('目标死亡')
+					}else{
+						if($('.background-photo[name=1]').attr('time')==undefined){
+							alert('请选择目标')
+						}else{
+							$(this).unbind();
+							$('#from').attr('href','play.html')
+						$('.background-photo[name=1]').css('opacity','0')
+						localStorage.setItem("loti",[loti+$('.background-photo[name=1]').attr('time')+','])
+						}
+					}
+				})
+			}
+			
+			//女巫
+			if(wo == 'wu'){
+				shi()
+				$("#foot").append("<footer><span class='ps' name='' id='du'>毒药</span><span class='ps' name='' id='jie'>解药</span><span class='ps' name='' id='run'>什么都不干</span></footer>")
+				
+				if($('.ps').attr('name') == ''){
+					$('li').unbind()
+				}
+				$('span').click(function(){
+					$(this).attr('name',1)
+					$(this).siblings('span').removeAttr('name')
+				})
+				
+				
+				
+				
+				var duy = localStorage.getItem('duy')
+				if(duy==1){
+					$('#du').unbind()
+				}else{
+					$('#du').click(function(){
+						$('li').click(function(){
+							$(this).siblings('li').find('.background-photo').removeAttr('name')
+							$(this).find('.background-photo').attr('name',1)
+							$(this).find('i').css('box-shadow','0 0 .5rem green')
+							$(this).siblings('li').find('i').removeAttr('style')
+						})
+						$(this).css('background-color','lightgreen')
+						$(this).siblings('span').css('background-color','white')
+						$('#yes').click(function(){
+							if($('.background-photo[name=1]').attr('title') == ''){
+								alert('目标错误')
+							}else if($('.background-photo[name=1]').attr('title') == '1'){
+									alert('目标死亡')
+								}else{
+									if($('.background-photo[name=1]').attr('time')==undefined){
+										alert('请选择目标')
+									}else{
+									$('.background-photo[name=1]').attr('time')
+									localStorage.setItem("dusha",$('.background-photo[name=1]').attr('time')+',')
+									localStorage.setItem('duy','1')
+									$(this).unbind()
+									$('#from').attr('href','play.html')
+								}
+							}
+						})
+					})
+				}
+				
+				
+				
+				
+				
+				if(jiey==1){
+					$('#jie').unbind()
+				}else{
+					$('#jie').click(function(){
+						$('li').unbind()
+						$('li').find('i').css('box-shadow','none')
+						$(this).css('background-color','red')
+						$(this).siblings('span').css('background-color','white')
+						$('#yes').click(function(){
+							$(this).unbind()
+							if($('.ps[name=1]').attr('id') == 'jie'){
+								localStorage.setItem('jiey','1')
+								localStorage.setItem("sha",'')
+								$('#from').attr('href','play.html')
+							}
+						})
+					})
+				}
+				
+				
+				
+				$('#run').click(function(){
+					$('li').unbind()
+					$('li').find('i').css('box-shadow','none')
+					$(this).css('background-color','yellow')
+					$(this).siblings('span').css('background-color','white')
+					$('#from').attr('href','play.html')
+				})
+				
+				
+				form()
+			}
+			
+			//守卫
+			if(wo == 'shou'){
+				localStorage.setItem("love",'')
+				shi()
+				form()
+				$('li').click(function(){
+					$(this).find('i').css('box-shadow','0 0 .5rem yellow')
+					$(this).siblings('li').find('i').removeAttr('style')
+				})
+				
+				if($('.background-photo[text="shou"]').attr('title') == '1'){
+					$('#from').click(function(){
+					
+					var shh = sha.split(',')
+						for(var sh = 0;sh<shh.length-1;sh++){
+								var die = localStorage.getItem("die")
+								localStorage.setItem("die",die+shh[sh]+',')
+						}
+					})
+					$('#from').attr('href','play.html')
+				}
+				$('#yes').click(function(){
+					if($('.background-photo[name=1]').attr('title') == ''){
+						alert('目标错误')
+					}else if($('.background-photo[name=1]').attr('title') == '1'){
+							alert('目标死亡')
+						}else{
+						if($('.background-photo[name=1]').attr('time')==undefined){
+							alert('请选择目标')
+						}else{
+							$(this).unbind()
+							$('#from').click(function(){
+								var love = localStorage.getItem("love")
+								var sha = localStorage.getItem("sha")
+								var dusha = localStorage.getItem("dusha")
+								if(sha == love){
+									var die = localStorage.getItem("die")
+									localStorage.setItem("die",die+dusha)
+									localStorage.setItem("sha",'')
+								}
+								else{
+									var die = localStorage.getItem("die")
+									localStorage.setItem("die",die+sha+dusha)
+								}
+							})
+							$('#from').attr('href','play.html')
+							$('.background-photo[name=1]').attr('src','img/hu.jpg')
+							localStorage.setItem("love",$('.background-photo[name=1]').attr('time')+',')
+						}
+					}
+				})
+				
+				
+			}
+			
+			//徽章
+			
+			if(wo == 'huiz'){
+				$('li').click(function(){
+					$(this).find('i').css('box-shadow','0 0 .5rem yellow')
+					$(this).siblings('li').find('i').removeAttr('style')
+				})
+				$('#yes').click(function(){
+					if($('.background-photo[name=1]').attr('title') == ''){
+						alert('目标错误')
+					}else if($('.background-photo[name=1]').attr('title') == '1'){
+						alert('目标死亡')
+					}else if($('.background-photo[name=1]').attr('time')==undefined){
+							alert('请选择目标')
+						}else{
+						$(this).unbind()
+						$('#from').attr('href','play.html')
+						localStorage.setItem("xian",$('.background-photo[name=1]').attr('time'))
+						$('.background-photo[name=1]').parent('i').append("<img id='hui' src='img/hui.png'>")
+					}
+				})
+			}
+			
+			
+			if(wo == 'fangzhu'){
+				$('li').click(function(){
+					$(this).find('i').css('box-shadow','0 0 .8rem white')
+					$(this).siblings('li').find('i').removeAttr('style')
+				})
+				$('#yes').click(function(){
+					$(this).attr('title','1')
+					if($('.background-photo[name=1]').attr('title') == ''){
+						alert('目标错误')
+					}else if($('.background-photo[name=1]').attr('title') == '1'){
+						alert('目标死亡')
+					}else if($('.background-photo[name=1]').attr('time')==undefined){
+							alert('请选择目标')
+						}else{
+						$(this).unbind()
+						$('#from').attr('href','play.html')
+						localStorage.setItem("die",[die+$('.background-photo[name=1]').attr('time')+','])
+						$('.background-photo[time='+$('.background-photo[name=1]').attr('time')+']').attr('src','img/sha.jpg').css('opacity','1')
+						localStorage.setItem("numb",$('.background-photo[name=1]').attr('time'))
+						var nub = localStorage.getItem("nub")
+						localStorage.setItem("nub",parseInt(nub)+1)
+						localStorage.setItem("wufa", '0')
+						var numb = localStorage.getItem("numb")
+						if(numb!=''){
+							alert((parseInt(numb)+1)+'号被放逐')
+							localStorage.setItem("numb",'')
+						}
+						var dusha = localStorage.getItem("dusha")
+						var dusi = dusha.split(',')
+						if(dusha!=''){
+							alert('昨夜'+(parseInt(dusi[0])+1)+'号死亡')
+						}
+						var arr = sha.split(',')
+						if(sha!=''){
+							alert('昨夜'+(parseInt(arr[0])+1)+'号死亡')
+						}
+						if(dusha=='' && sha==''){
+							alert('昨夜平安夜')
+						}
+						
+						localStorage.setItem("day",sishou+','+(parseInt(numb)+1)+','+(parseInt(arr[0])+1)+','+(parseInt(dusi[0])+1))
+						}
+				})
+				$('#from').click(function(){
+					if($('#yes').attr('title')=='1'){
+						form()
+						$('#yes').attr('title','')
+						var day = localStorage.getItem("day");
+						var arr = day.split(',');
+						var ars = [];
+						for(var i=0;i<arr.length;i++){
+							if(arr[i]=='NaN'){
+								ars[i]='无人'
+							}else{
+								ars[i]=arr[i]
+							}
+						}
+						var jieguo = localStorage.getItem("jieguo");
+						localStorage.setItem("jieguo",jieguo+"<h3>第"+ars[0]+"天</h3><p>"+ars[1]+"被放逐</p><p>"+ars[2]+"死于狼刀</p><p>"+ars[3]+"死于毒杀</p>")
+					}else{
+						alert('请选择目标')
+					}
+				})
+			}
+			//法官
+			if(wo == 'boss'){
+				$('#from').attr('href','play.html')
+				for(var las=0 ;las < c;las++){
+					if($(".background-photo[time="+las+"]").attr('title') == '1'){
+						$(".background-photo[time="+las+"]").attr('src','img/logo.png')
+					}else{
+						$(".background-photo[time="+las+"]").css('opacity','0')
+					}
+				}
+			}
+		</script>
+		
+		
+	</body>
+</html>

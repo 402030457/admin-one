@@ -3,11 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<script src="js/rem.js"></script>
+		<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-	<link rel="stylesheet" type="text/css" href="css/index.css"/>
-	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-	<script src="js/rem.js"></script>
-	<script src="jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<div class="one" id="">
@@ -18,8 +17,7 @@
 				<input id="play" type="button" onclick="autoPlay()" value="播放" />
 				<input id="pause" type="button" onclick="closePlay()" value="关闭" />
 				<img id="photo" src="img/open.jpg" >
-				<audio id="myaudio" src="高田雅史%20-%20ゼツボウシンドローム%20The%20Animation.mp3" hidden="flase" autoplay="true" loop="true">
-				</audio>
+				<audio id="myaudio" src="back.mp3" hidden="flase" autoplay="true" loop="true"></audio>
 			</div>
 		</header>
 		
@@ -32,11 +30,11 @@
 		<section>
 			<div id="name">
 				<h1><span id="">用户名</span></h1>
-				<input type="" name="" id="" value="" />
+				<input type="" name="" id="yonghu" value="" />
 			</div>
 			<div id="pass">
 				<h1><span id="">密码</span></h1>
-				<input type="" name="" id="" value="" />
+				<input type="password" name="" id="mima" value="" disabled="disabled"/>
 			</div>
 		</section>
 		
@@ -44,13 +42,13 @@
 		
 		<footer>
 			<p>
-				<a href="number.html">登陆</a>
+				<a id="deng">登陆</a>
 			</p>
 			<p>
 				<a href="land.html">注册</a>
 			</p>
 			<p>
-				<a>忘记密码</a>
+				<a href="change.html">忘记密码</a>
 			</p>
 		</footer>
 		
@@ -76,7 +74,6 @@
 					$(lbt[2]).attr("src","./img/"+now+".jpg")
 				}
 			}
-			console.log(lbt.length)
 			setInterval(function(){
 				now++
 				if(now == lbt.length+1){
@@ -84,6 +81,42 @@
 				}
 				show()
 			},3000)
+			
+			$('#yonghu').blur(function(){
+				var val = $('#yonghu').val()
+				let zeo = /^[\u4e00-\u9fa5]+$/;
+				let zet = /^[a-zA-Z]{1,}[0-9A-Za-z]{7,}$/;
+				if(val == ''){
+					alert('请输入用户名')
+				}else{
+					if (!zeo.test(val)) {
+						if(zet.test(val)){
+							if(localStorage.getItem(val) == null){
+								alert('用户名不存在')
+							}else{
+								$(this).attr('disabled','disabled')
+								$('#mima').removeAttr('disabled')
+							}
+						}else{
+							alert('请输入首字为字母，至少8位字母加数字')
+						}
+					}else{
+						alert('不能包含汉字！')
+					}
+				}
+				
+			})
+			$('#mima').blur(function(){
+				var val = $('#mima').val()
+				if(localStorage.getItem($('#yonghu').val()) == val){
+					$(this).attr('disabled','disabled')
+					$('#deng').attr('href','number.html')
+				}else{
+					alert('密码错误')
+				}
+				
+			})
+			
 		</script>
 		<script src="js/reset.js"></script>
 	</body>
